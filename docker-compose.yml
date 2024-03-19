@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  mongo-bot-db:
+    image: mongo:latest
+    volumes:
+      - ./data:/data/db
+    expose:
+      - '27017'
+
+  bot-app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: 'bot-app'
+    restart: 'always'
+    depends_on:
+      - mongo-bot-db
